@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a; /* Slate dark color for better readability */
+}
+
+/* Force light theme colors */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Selection Color (Pro Touch) */
+::selection {
+  background-color: #FFD700;
+  color: #000;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ... (তোর আগের CSS) */
+
+/* The 'Agun' Typography Style */
+.text-outline-gold {
+  -webkit-text-stroke: 1.5px rgba(255, 215, 0, 0.6); /* Gold outline with transparency */
+  color: transparent; /* Makes the fill transparent */
+}
+
+/* Swiper Pagination Customization */
+.swiper-pagination-bullet {
+  @apply w-2 h-2 bg-white rounded-full opacity-30 transition-all duration-300;
+}
+
+.swiper-pagination-bullet-active {
+  @apply w-12 h-2 bg-[#FFD700] opacity-100 rounded-full; /* The active bullet is long and gold */
+}
+
+/* Custom Animation for slow background zooming */
+@keyframes scale-slow {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.15);
+  }
+}
+
+.animate-scale-slow {
+  animation: scale-slow 15s linear infinite alternate;
+}
+
+@keyframes tiger-progress {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(0); }
+  100% { transform: translateX(100%); }
+}
+
+.animate-tiger-progress {
+  animation: tiger-progress 1.5s infinite ease-in-out;
+}
+
+/* GLOBAL CONTAINER */
+.container{
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+}
