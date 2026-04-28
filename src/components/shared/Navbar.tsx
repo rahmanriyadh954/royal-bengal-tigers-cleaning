@@ -36,7 +36,7 @@ const Navbar = () => {
     checkUser();
 
     // ২. অথেনটিকেশন স্টেট চেঞ্জ মনিটর করা (লগইন/লগআউট হলে সাথে সাথে আপডেট হবে)
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: any , session) => {
       setUser(session?.user || null);
       setUserProfile(session?.user.user_metadata || null);
     });
