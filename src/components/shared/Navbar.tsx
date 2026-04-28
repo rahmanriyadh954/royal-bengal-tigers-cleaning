@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 import Link from 'next/link';
+import { AuthChangeEvent, Session } from '@supabase/supabase-js';
 import { Menu, X, Phone, User, Search, LogOut, LayoutDashboard } from 'lucide-react';
 import Image from 'next/image';
 import { createClient } from '../../lib/supabase'; // তোর সুপাবেস কনফিগ পাথ ঠিক আছে তো? না থাকলে বদলে নিস
@@ -36,10 +37,15 @@ const Navbar = () => {
     checkUser();
 
     // ২. অথেনটিকেশন স্টেট চেঞ্জ মনিটর করা (লগইন/লগআউট হলে সাথে সাথে আপডেট হবে)
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: any , session) => {
-      setUser(session?.user || null);
-      setUserProfile(session?.user.user_metadata || null);
-    });
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event: AuthChangeEvent, session: Session | null) => {
+  if (session) {
+    setUser(session.user);
+    setUserProfile(session.user.user_metadata);
+  } else {
+    setUser(null);
+    setUserProfile(null);
+  }
+});
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
